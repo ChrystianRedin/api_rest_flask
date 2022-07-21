@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    db-docs:
+      image: postgres:14
+      volumes:
+        - ./data/db:/var/lib/postgres/data
+      mem_limit: 1024m
+      mem_reservation: 256M
+      restart: always
+      cpus: 1.0
+      ports:
+        - "5440:5432"
+      environment:
+        - POSTGRES_HOST=db-docs
+        - POSTGRES_PORT=5432
+        - POSTGRES_NAME=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+    web:
+      build: .
+      volumes:
+        - .:/code
+      mem_limit: 1024m
+      mem_reservation: 256M
+      restart: always
+      cpus: 1.0
+      ports:
+        - "5000:5000"
+      environment:
+        - FLASK_ENV=development
+        - POSTGRES_HOST=db-docs
+        - POSTGRES_PORT=5432
+        - POSTGRES_NAME=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      depends_on:
+        - db-docs
+
+
+volumes:
+  postgres_data:
