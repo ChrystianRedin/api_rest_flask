@@ -4,9 +4,11 @@ from flask_restful import  Api
 from routes.users import users_routes
 # Recursos Documentos
 from resources.documentos import Documentos, Documento
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 # Registro de la ruta
 app.register_blueprint(users_routes)
