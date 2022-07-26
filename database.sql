@@ -11,7 +11,7 @@ CREATE TABLE users (
 CREATE TABLE documents (
     id_doc uuid DEFAULT uuid_generate_v4(),
     folio_doc VARCHAR(255),
-    tip_doc VARCHAR(255),
+    tipo_doc VARCHAR(255),
     fecha_doc VARCHAR(255),
     asunto_doc VARCHAR(255),
     dirigido_doc VARCHAR(255),

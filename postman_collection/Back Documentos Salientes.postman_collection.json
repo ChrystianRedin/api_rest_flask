@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "55f0254c-4ef6-49f7-aaf0-8a96a31a8597",
+		"name": "Back Documentos Salientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create - /documents",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTEwMzMzLCJqdGkiOiI2OWY1MDM1YmE2N2E0NmE0YTIzNTcwZTdhZTUyOTZlMCIsInVzZXJfaWQiOjF9.UGwk16GiiLid6oJo1W0Eh76mKAOoew8hko3MRGjpbQY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Basic YWRtaW46MTIz"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "uhJMwh54F82IX2V6CO4BgyO9GBu97TuVL8vpxZMiMmlCdph6vjInXe3rOTkOFFma"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"folio_doc\":\"F-0004\",\n    \"tipo_doc\":\"Solicitud\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/documents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List- /documents",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTEwMzMzLCJqdGkiOiI2OWY1MDM1YmE2N2E0NmE0YTIzNTcwZTdhZTUyOTZlMCIsInVzZXJfaWQiOjF9.UGwk16GiiLid6oJo1W0Eh76mKAOoew8hko3MRGjpbQY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Basic YWRtaW46MTIz"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "uhJMwh54F82IX2V6CO4BgyO9GBu97TuVL8vpxZMiMmlCdph6vjInXe3rOTkOFFma"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/documents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Data id - /document/<string:id>",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTEwMzMzLCJqdGkiOiI2OWY1MDM1YmE2N2E0NmE0YTIzNTcwZTdhZTUyOTZlMCIsInVzZXJfaWQiOjF9.UGwk16GiiLid6oJo1W0Eh76mKAOoew8hko3MRGjpbQY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Basic YWRtaW46MTIz"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "uhJMwh54F82IX2V6CO4BgyO9GBu97TuVL8vpxZMiMmlCdph6vjInXe3rOTkOFFma"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/document/029d1598-2ffc-4ff5-96e1-2ca75e8e4225",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"document",
+						"029d1598-2ffc-4ff5-96e1-2ca75e8e4225"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update id - /document/<string:id> Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTEwMzMzLCJqdGkiOiI2OWY1MDM1YmE2N2E0NmE0YTIzNTcwZTdhZTUyOTZlMCIsInVzZXJfaWQiOjF9.UGwk16GiiLid6oJo1W0Eh76mKAOoew8hko3MRGjpbQY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Basic YWRtaW46MTIz"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "uhJMwh54F82IX2V6CO4BgyO9GBu97TuVL8vpxZMiMmlCdph6vjInXe3rOTkOFFma"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"folio_doc\":\"F-001U1\",\n    \"tipo_doc\":\"Invitacion\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/document/029d1598-2ffc-4ff5-96e1-2ca75e8e4225",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"document",
+						"029d1598-2ffc-4ff5-96e1-2ca75e8e4225"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete id - /document/<string:id> Copy 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3NTEwMzMzLCJqdGkiOiI2OWY1MDM1YmE2N2E0NmE0YTIzNTcwZTdhZTUyOTZlMCIsInVzZXJfaWQiOjF9.UGwk16GiiLid6oJo1W0Eh76mKAOoew8hko3MRGjpbQY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "authorization",
+						"value": "Basic YWRtaW46MTIz"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "uhJMwh54F82IX2V6CO4BgyO9GBu97TuVL8vpxZMiMmlCdph6vjInXe3rOTkOFFma"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"folio_doc\":\"F-001U1\",\n    \"tipo_doc\":\"Invitacion\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/document/029d1598-2ffc-4ff5-96e1-2ca75e8e4225",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"document",
+						"029d1598-2ffc-4ff5-96e1-2ca75e8e4225"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
