@@ -57,20 +57,49 @@ class Documento(Resource):
 
     # Actualizar por Id
     def put(self, id_doc):
+
+        form = request.get_json()
+
+        folio_doc = form.get("folio_doc")
+        tipo_doc = form.get("tipo_doc")
+        fecha_doc = form.get("fecha_doc") 
+        asunto_doc = form.get("asunto_doc")
+        depto_asignar = form.get("depto_asignar")
+        titular_asignar= form.get("titular_asignar")
+        contenido_doc = form.get("contenido_doc")
+        copia_doc = form.get("copia_doc")
+        slbr_doc = form.get("slbr_doc")
+        id_firma = form.get("id_firma")
         
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
-        new_data_doc = request.get_json()
-
-        folio_doc = new_data_doc["folio_doc"]
-        tipo_doc = new_data_doc["tipo_doc"]
 
         cur.execute(
-            "UPDATE documents SET folio_doc=%s, tipo_doc=%s WHERE id_doc=%s RETURNING *",
+            """UPDATE documents SET 
+            folio_doc=%s, 
+            tipo_doc=%s,
+            fecha_doc=%s,
+            asunto_doc=%s,
+            depto_asignar=%s,
+            titular_asignar=%s,
+            contenido_doc=%s,
+            copia_doc=%s,
+            slbr_doc=%s,
+            id_firma=%s  
+            WHERE id_doc=%s 
+            RETURNING *""",
             (
                 folio_doc,
                 tipo_doc,
-                id_doc,
+                fecha_doc,
+                asunto_doc,
+                depto_asignar,
+                titular_asignar,
+                contenido_doc,
+                copia_doc,
+                slbr_doc,
+                id_firma,
+                id_doc
             ),
         )
         doc_updated = cur.fetchone()
@@ -125,17 +154,35 @@ class Documentos(Resource):
             )
     def post(self):
         # Informacion del request
-        new_document = request.get_json()
+        form = request.get_json()
 
-        folio_doc = new_document["folio_doc"]
-        tipo_doc = new_document["tipo_doc"]
+        folio_doc = form.get("folio_doc")
+        tipo_doc = form.get("tipo_doc")
+        fecha_doc = form.get("fecha_doc") 
+        asunto_doc = form.get("asunto_doc")
+        depto_asignar = form.get("depto_asignar")
+        titular_asignar= form.get("titular_asignar")
+        contenido_doc = form.get("contenido_doc")
+        copia_doc = form.get("copia_doc")
+        slbr_doc = form.get("slbr_doc")
+        id_firma = form.get("id_firma")
 
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
         cur.execute(
-            "INSERT INTO documents (folio_doc, tipo_doc) VALUES (%s, %s) RETURNING *",
-            (folio_doc,tipo_doc),
+            "INSERT INTO documents (folio_doc, tipo_doc, fecha_doc, asunto_doc, depto_asignar, titular_asignar, contenido_doc, copia_doc, slbr_doc) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *",
+            (   
+                folio_doc,
+                tipo_doc,
+                fecha_doc,
+                asunto_doc,
+                depto_asignar,
+                titular_asignar,
+                contenido_doc,
+                copia_doc,
+                slbr_doc
+            ),
         )
         # Regresa ultimo usuario creado
         new_document_created = cur.fetchone()
