@@ -8,6 +8,7 @@ CREATE TABLE users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+
 CREATE TABLE documents (
     id_doc uuid DEFAULT uuid_generate_v4(),
     folio_doc VARCHAR(255),
