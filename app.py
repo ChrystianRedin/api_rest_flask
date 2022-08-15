@@ -9,6 +9,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
 
 # Registro de la ruta
 app.register_blueprint(users_routes)
