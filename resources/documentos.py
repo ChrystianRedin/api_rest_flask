@@ -11,9 +11,12 @@ class Documento(Resource):
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
-        cur.execute("SELECT * FROM documents WHERE id_doc = %s", (id_doc,))
+        cur.execute("""
+            SELECT * FROM documents
+            WHERE id_doc = %s""", 
+            (id_doc,))
         document_by_id = cur.fetchone()
-
+        
         if document_by_id:
             return jsonify({
                 "status": True,
@@ -33,8 +36,8 @@ class Documento(Resource):
 
         cur.execute("DELETE FROM documents WHERE id_doc = %s RETURNING *", (id_doc,))
         doc_deleted = cur.fetchone()
-
         conn.commit()
+        
         conn.close()
         cur.close()
 
@@ -152,6 +155,8 @@ class Documentos(Resource):
                 ),
                 404,
             )
+
+    # Creacion del Documento
     def post(self):
         # Informacion del request
         form = request.get_json()
@@ -166,31 +171,59 @@ class Documentos(Resource):
         copia_doc = form.get("copia_doc")
         slbr_doc = form.get("slbr_doc")
         id_firma = form.get("id_firma")
+        id_user = form.get("id_user")
 
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
+        # Insert en Tabla documents
         cur.execute(
-            "INSERT INTO documents (folio_doc, tipo_doc, fecha_doc, asunto_doc, depto_asignar, titular_asignar, contenido_doc, copia_doc, slbr_doc) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *",
+            "INSERT INTO documents (folio_doc, tipo_doc, fecha_doc, asunto_doc, depto_asignar, contenido_doc, copia_doc, slbr_doc, id_user) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *",
             (   
                 folio_doc,
                 tipo_doc,
                 fecha_doc,
                 asunto_doc,
                 depto_asignar,
-                titular_asignar,
                 contenido_doc,
                 copia_doc,
-                slbr_doc
+                slbr_doc,
+                id_user
             ),
         )
         # Regresa ultimo usuario creado
         new_document_created = cur.fetchone()
         conn.commit()
-        cur.close()
-        conn.close()
+        #cur.close()
 
+        # Si el documento se Creó 
         if new_document_created:
+
+            # ID del Documento que se acaba de crear
+            id_documento_creado = new_document_created["id_doc"]
+
+            # Insertar Titulares Que Firmaran Documento a la Tabla  (firmantes_docs)
+            # For de Titulares
+            for titular in titular_asignar:
+
+                # UUID del Titular
+                id_titular = titular["id_user"]
+
+                # Insert Tabla Firmantes (Firma electronica)
+                cur.execute(
+                    "INSERT INTO firmantes_docs (id_doc, id_user) VALUES (%s,%s) RETURNING *",
+                    (   
+                        id_documento_creado,
+                        id_titular 
+                    ),
+                )
+                #new_titular_insert += cur.fetchone()
+                conn.commit()
+
+            
+            # Cerrar Conexion Base de Datos
+            cur.close()
+            conn.close()
 
             return jsonify({
                 "status": True,

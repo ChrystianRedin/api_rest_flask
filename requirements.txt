@@ -12,6 +12,7 @@ MarkupSafe==2.1.1
 psycopg2-binary==2.9.3
 pycparser==2.21
 pytz==2022.1
+#sqlalchemy==1.4.40
 six==1.16.0
 Werkzeug==2.1.2
 zipp==3.8.1
