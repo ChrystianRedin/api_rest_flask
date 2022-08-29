@@ -39,8 +39,8 @@ api.add_resource(Documentos, '/documents')
 api.add_resource(Documento, '/document/<string:id_doc>')
 
 # Users
-api.add_resource(UserListResource, '/users/')
-api.add_resource(UserResource, '/user/<string:id_user>/')
+api.add_resource(UserListResource, '/api/users/')
+api.add_resource(UserResource, '/api/user/<string:id_user>/')
 
 # Auth User
 api.add_resource(AuthUserResource, '/user_ext/<string:id_ext>')
