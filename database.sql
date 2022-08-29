@@ -41,5 +41,16 @@ CREATE TABLE firmantes_docs (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
     ALTER TABLE firmantes_docs ADD CONSTRAINT fk_firma_document FOREIGN KEY (id_doc) REFERENCES documents(id_doc) ON DELETE CASCADE;
-    ALTER TABLE firmantes_docs ADD CONSTRAINT fk_firma_user FOREIGN KEY (id_user) REFERENCES users(id_user);
+    ALTER TABLE firmantes_docs ADD CONSTRAINT fk_firma_user FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE SET NULL;
+-- FIN TABLA Firmantes_Docs
+
+-- TABLA usuario_sistemas (Usuario Sistemas)
+CREATE TABLE usuario_sistemas (
+    id_user_sys uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id_user uuid,
+    nombre_sistema VARCHAR(255),
+    id_sistema uuid,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+    ALTER TABLE usuario_sistemas ADD CONSTRAINT fk_usersys_userdocs FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE SET NULL;
 -- FIN TABLA Firmantes_Docs

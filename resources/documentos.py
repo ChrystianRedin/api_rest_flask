@@ -62,7 +62,6 @@ class Documento(Resource):
     def put(self, id_doc):
 
         form = request.get_json()
-
         folio_doc = form.get("folio_doc")
         tipo_doc = form.get("tipo_doc")
         fecha_doc = form.get("fecha_doc") 
@@ -72,7 +71,6 @@ class Documento(Resource):
         contenido_doc = form.get("contenido_doc")
         copia_doc = form.get("copia_doc")
         slbr_doc = form.get("slbr_doc")
-        id_firma = form.get("id_firma")
         
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
@@ -88,7 +86,6 @@ class Documento(Resource):
             contenido_doc=%s,
             copia_doc=%s,
             slbr_doc=%s,
-            id_firma=%s  
             WHERE id_doc=%s 
             RETURNING *""",
             (
@@ -101,7 +98,6 @@ class Documento(Resource):
                 contenido_doc,
                 copia_doc,
                 slbr_doc,
-                id_firma,
                 id_doc
             ),
         )
@@ -170,7 +166,6 @@ class Documentos(Resource):
         contenido_doc = form.get("contenido_doc")
         copia_doc = form.get("copia_doc")
         slbr_doc = form.get("slbr_doc")
-        id_firma = form.get("id_firma")
         id_user = form.get("id_user")
 
         conn = get_connection()
