@@ -6,6 +6,8 @@ ENV FLASK_APP index.py
 
 ENV FLASK_RUN_HOST 0.0.0.0
 
+RUN apk add build-base
+
 # RUN apk add --no-cache gcc musl-dev linux-headers
 
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo
