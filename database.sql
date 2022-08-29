@@ -4,7 +4,6 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- TABLA Users
 CREATE TABLE users (
     id_user uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    id_user_colibri TEXT,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255),
