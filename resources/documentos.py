@@ -71,6 +71,7 @@ class Documento(Resource):
         contenido_doc = form.get("contenido_doc")
         copia_doc = form.get("copia_doc")
         slbr_doc = form.get("slbr_doc")
+        id_user= form.get("id_user")
         
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
@@ -131,7 +132,7 @@ class Documentos(Resource):
 
         cur.execute("SELECT * FROM documents")
         documentos = cur.fetchall()
-
+        
         cur.close()
         conn.close()
 
@@ -230,3 +231,36 @@ class Documentos(Resource):
                 "status": False,
                 "msj": f"Documento no creado!",
             }), 404
+
+
+class Documento_Id_User(Resource):
+    # Documentos Por Id Usuario
+    def get(self, id_user):
+        conn = get_connection()
+        cur = conn.cursor(cursor_factory=extras.RealDictCursor)
+
+        cur.execute("""
+            SELECT * FROM documents
+            WHERE id_user = %s""", 
+            (id_user,))
+        documentos = cur.fetchall()
+
+        cur.close()
+        conn.close()
+
+        if documentos:
+            return jsonify({
+                "status": True,
+                "msj": "Listado documentos por ID usuario",
+                "data": documentos
+            })
+        else:
+            return (
+                jsonify(
+                    {
+                        "status": False,
+                        "msj": f"Documentos no localizados - Lista documentos no disponible!",
+                    }
+                ),
+                404,
+            )

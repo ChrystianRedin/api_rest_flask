@@ -13,7 +13,7 @@ from models.area import db
 from models.auth_users import db
 
 # Resources
-from resources.documentos import Documentos, Documento
+from resources.documentos import Documentos, Documento, Documento_Id_User
 from resources.users import UserListResource, UserResource
 from resources.auth_users import AuthUserResource
 
@@ -36,6 +36,7 @@ cors = CORS(app, resource={
 
 # Documentos
 api.add_resource(Documentos, '/documents')
+api.add_resource(Documento_Id_User, '/documents/<string:id_user>')
 api.add_resource(Documento, '/document/<string:id_doc>')
 
 # Users
