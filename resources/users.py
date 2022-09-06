@@ -1,7 +1,10 @@
 # Flask RESTful
 from http.client import SWITCHING_PROTOCOLS
+#from turtle import update
+from flask import jsonify
 from flask_restful import Resource, request
-from flask_sqlalchemy import SQLAlchemy 
+from sqlalchemy import update
+from flask_sqlalchemy import SQLAlchemy
 from cryptography.fernet import Fernet  
 from models.user import User
 from schemas.user import user_schema, users_schema
@@ -28,7 +31,12 @@ class UserListResource(Resource):
         )
         db.session.add(new_user)
         db.session.commit()
-        return user_schema.dump(new_user)
+        return jsonify({
+            "status":True,
+            "msj":"Usuario Creado!",
+            "data": user_schema.dump(new_user)
+        })
+
 
 
 class UserResource(Resource):
@@ -40,9 +48,21 @@ class UserResource(Resource):
 
     # Actualizar Usuario
     def patch(self, id_user):
-        update_user = User.query.get_or_404(id_user)
+        update_user = db.session.execute(
+        update(User).
+        where(User.id_user == id_user).
+        values(
+            username=request.json['username'],
+            email= request.json['email'],
+            activo = request.json['activo']
+            )
+      )
         db.session.commit()
-        return user_schema.dump(update_user)
+        return jsonify({
+            "status":True,
+            "msj":"Usuario Creado!",
+            "data": user_schema.dump(update_user)
+        })
     
     # Eliminar Usuario
     def delete(self, id_user):

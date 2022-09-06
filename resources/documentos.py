@@ -76,7 +76,7 @@ class Documento(Resource):
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
         cur.execute(
-            """UPDATE documents SET 
+            """ UPDATE documents SET 
             folio_doc=%s, 
             tipo_doc=%s,
             fecha_doc=%s,
@@ -85,9 +85,9 @@ class Documento(Resource):
             titular_asignar=%s,
             contenido_doc=%s,
             copia_doc=%s,
-            slbr_doc=%s,
+            slbr_doc=%s
             WHERE id_doc=%s 
-            RETURNING *""",
+            RETURNING * """,
             (
                 folio_doc,
                 tipo_doc,

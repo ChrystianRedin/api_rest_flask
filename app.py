@@ -43,5 +43,5 @@ api.add_resource(UserListResource, '/api/users')
 api.add_resource(UserResource, '/api/user/<string:id_user>')
 
 # Auth User
-api.add_resource(AuthUserResource, '/user_ext/<string:id_ext>')
+api.add_resource(AuthUserResource, '/api/user_ext/<string:id_ext>')
 

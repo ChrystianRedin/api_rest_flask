@@ -20,7 +20,6 @@ class User(db.Model):
     password = db.Column(db.String(100))
     email = db.Column(db.String(120), unique=True, nullable=False)
     activo = db.Column(db.Boolean, default=True, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
    
     #area = db.relationship('Area', backref='user', lazy=True)
 
