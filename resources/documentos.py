@@ -71,7 +71,6 @@ class Documento(Resource):
         contenido_doc = form.get("contenido_doc")
         copia_doc = form.get("copia_doc")
         slbr_doc = form.get("slbr_doc")
-        id_user= form.get("id_user")
         
         conn = get_connection()
         cur = conn.cursor(cursor_factory=extras.RealDictCursor)

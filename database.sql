@@ -8,7 +8,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     activo BOOLEAN,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- FIN TABLA Users
 
@@ -26,7 +26,7 @@ CREATE TABLE documents (
     copia_doc VARCHAR(255),
     slbr_doc VARCHAR(255),
     cancelado BOOLEAN,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
     ALTER TABLE documents ADD CONSTRAINT fk_document_user FOREIGN KEY (id_user) REFERENCES users(id_user);
 -- FIN TABLA Documents
