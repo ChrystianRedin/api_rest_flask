@@ -1,0 +1,298 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "API Documentos Salientes",
+      "version": "1.0.0",
+      "title": "Documentos Salientes",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "tags": [
+      {
+        "name": "API Documentos Salientes",
+        "description": "API para documentos salientes IIEG"
+      }
+    ],
+     "servers": [
+          {
+          "url": "/"
+          }
+      ],
+         "components": {
+          "schemas": {
+              "DocumentList": {
+                  "type": "object",
+                  "properties": {
+                      "asunto_doc": {
+                      "type": "string",
+                      "description": "Asunto del Documento",
+                      "example": "Junta de Gobierno 2022"
+                      },
+                      "contenido_doc": {
+                      "type": "string",
+                      "description": "Contenido del documento",
+                      "example": "El Consejo de Gobierno ha acordado instar a la Consejería de Universidad, Investigación e Innovación a ..."
+                      },
+                      "copia_doc": {
+                      "type": "string",
+                      "description": "Con Copia a: ",
+                      "example": "Departamento Geografia"
+                      },
+                      "depto_asignar": {
+                      "type": "string",
+                      "description": "Area o departamento a asignar",
+                      "example": "CGTI"
+                      },
+                      "fecha_doc": {
+                      "type": "string",
+                      "description": "Fecha de creacion del documento (yyyy-mm-dd)",
+                      "example": "2022-11-16"
+                      },
+                      "folio_doc": {
+                      "type": "string",
+                      "description": "Folio del documento",
+                      "example": "CGTI-0001"
+                      },
+                      "id_user": {
+                      "type": "string",
+                      "description": "UUID del usuario que creó el documento",
+                      "example": "59dbaf18-310c-48ec-b20d-bbfc61ae8855"
+                      },
+                      "slbr_doc": {
+                      "type": "string",
+                      "description": "SLBR del usuario que creó el documento",
+                      "example": "M.A.D.N"
+                      },
+                      "tipo_doc": {
+                      "type": "string",
+                      "description": "Tipo del documento creado",
+                      "example": "Memorandum"
+                      }
+                  }
+              },
+              "UUID":{
+              "type" : "string",
+              "properties" : {
+                  "name" : {
+                      "type" : "uuid"
+                  }
+              }
+          },
+              "update":{
+                "type": "object",
+                "properties" :{
+                    "asunto_doc": {
+                        "type": "string",
+                        "description": "Asunto del Documento",
+                        "example": "Junta de Gobierno 2022"
+                        },
+                        "contenido_doc": {
+                        "type": "string",
+                        "description": "Contenido del documento",
+                        "example": "El Consejo de Gobierno ha acordado instar a la Consejería de Universidad, Investigación e Innovación a ..."
+                        },
+                        "copia_doc": {
+                        "type": "string",
+                        "description": "Con Copia a: ",
+                        "example": "Departamento Geografia"
+                        },
+                        "depto_asignar": {
+                        "type": "string",
+                        "description": "Area o departamento a asignar",
+                        "example": "CGTI"
+                        },
+                        "fecha_doc": {
+                        "type": "string",
+                        "description": "Fecha de creacion del documento (yyyy-mm-dd)",
+                        "example": "2022-11-16"
+                        },
+                        "folio_doc": {
+                        "type": "string",
+                        "description": "Folio del documento",
+                        "example": "CGTI-0001"
+                        },
+                        "id_user": {
+                        "type": "string",
+                        "description": "UUID del usuario que creó el documento",
+                        "example": "59dbaf18-310c-48ec-b20d-bbfc61ae8855"
+                        },
+                        "slbr_doc": {
+                        "type": "string",
+                        "description": "SLBR del usuario que creó el documento",
+                        "example": "M.A.D.N"
+                        },
+                        "tipo_doc": {
+                        "type": "string",
+                        "description": "Tipo del documento creado",
+                        "example": "Memorandum"
+                        }
+                }
+              }
+          }
+      },
+       "paths": {
+          "/documents": {
+              "post": {
+              "tags": [
+                  "Crear Documento"
+              ],
+              "summary": "Crear Documento",
+              "requestBody": {
+              "description": "Nuevo Document a Base de datos",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  }
+              }
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  },
+                  "404": {
+                      "description": "NOT FOUND",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+              }
+              }
+              },
+              "get" :{
+                  "tags": [
+                      "Listado Documentos"
+                  ],
+                  "summary": "Listado de documentos",
+                 
+                  "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  },
+                  "404": {
+                      "description": "NOT FOUND",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+              }
+              }
+              }
+          },
+          "/document/{id_doc}":{
+  
+              "get" :{
+                  "tags": [
+                      "Informacion de Documento"
+                  ],
+                  "summary": "Documento por UUID",
+                  "parameters": [{
+                    "name": "id_doc",
+                    "in": "path",
+                    "description": "UUID documento",
+                    "required": true,
+                    "type": "string",
+                    "schema" : {
+                        "$ref": "#/components/schemas/UUID"
+                    }
+                  }],
+                 
+                  "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  },
+                  "404": {
+                      "description": "NOT FOUND",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+              }
+              }
+              },
+             
+              "put": {
+              "tags": [
+                  "Actualizar Documento"
+              ],
+              "parameters": [{
+                  "name": "id_doc",
+                  "in": "path",
+                  "description": "UUID del documento a actualizar",
+                  "required": true,
+                  "type": "string",
+                  "schema" : {
+                      "$ref": "#/components/schemas/UUID"
+                  }
+              }],
+              "summary": "Actualizar Documento por UUID",
+              "requestBody": {
+              "description": "Actualizar un Documento en la Base de datos",
+              "required": true,
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "$ref": "#/components/schemas/update"
+                      }
+                  }
+              }
+              },
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  },
+                  "404": {
+                      "description": "NOT FOUND",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+              }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Eliminar Documento"
+              ],
+              "parameters": [{
+                  "name": "id_doc",
+                  "in": "path",
+                  "description": "UUID del documento a eliminar",
+                  "required": true,
+                  "type": "string",
+                  "schema" : {
+                      "$ref": "#/components/schemas/UUID"
+                  }
+              }],
+              "summary": "Eliminar documento por UUID",
+              
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+                  },
+                  "404": {
+                      "description": "NOT FOUND",
+                      "schema": {
+                      "$ref": "#/components/schemas/DocumentList"
+                      }
+              }
+              }
+          }
+          }
+  }
+  }

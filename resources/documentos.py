@@ -199,32 +199,40 @@ class Documentos(Resource):
 
             # Insertar Titulares Que Firmaran Documento a la Tabla  (firmantes_docs)
             # For de Titulares
-            for titular in titular_asignar:
+            if titular_asignar:
+                for titular in titular_asignar:
 
                 # UUID del Titular
-                id_titular = titular["id_user"]
+                    id_titular = titular["id_user"]
 
-                # Insert Tabla Firmantes (Firma electronica)
-                cur.execute(
-                    "INSERT INTO firmantes_docs (id_doc, id_user) VALUES (%s,%s) RETURNING *",
-                    (   
-                        id_documento_creado,
-                        id_titular 
-                    ),
-                )
-                #new_titular_insert += cur.fetchone()
-                conn.commit()
+                    # Insert Tabla Firmantes (Firma electronica)
+                    cur.execute(
+                        "INSERT INTO firmantes_docs (id_doc, id_user) VALUES (%s,%s) RETURNING *",
+                        (   
+                            id_documento_creado,
+                            id_titular 
+                        ),
+                    )
+                    #new_titular_insert += cur.fetchone()
+                    conn.commit()
+                    cur.close()
+                    conn.close()
 
-            
-            # Cerrar Conexion Base de Datos
-            cur.close()
-            conn.close()
+                    return jsonify({
+                        "status": True,
+                        "msj": "Documento creado!",
+                        "data": new_document_created
+                    })
+            else:
+                # Cerrar Conexion Base de Datos
+                cur.close()
+                conn.close()
 
-            return jsonify({
-                "status": True,
-                "msj": "Documento creado!",
-                "data": new_document_created
-            })
+                return jsonify({
+                    "status": True,
+                    "msj": "Documento creado!",
+                    "data": new_document_created
+                })
         else:
             return jsonify({
                 "status": False,
