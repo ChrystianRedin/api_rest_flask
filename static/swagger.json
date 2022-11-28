@@ -187,6 +187,38 @@
               }
               }
           },
+          "/documents/{id_user}": {
+            "get" :{
+                "tags": [
+                    "Listado Documentos creado por Usuario"
+                ],
+                "summary": "Listado de documentos creados por UUID del Usuario",
+                "parameters": [{
+                    "name": "id_user",
+                    "in": "path",
+                    "description": "UUID del Usuario",
+                    "required": true,
+                    "type": "string",
+                    "schema" : {
+                        "$ref": "#/components/schemas/UUID"
+                    }
+                  }],
+                "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/DocumentList"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/DocumentList"
+                    }
+            }
+            }
+            }
+        },
           "/document/{id_doc}":{
   
               "get" :{
